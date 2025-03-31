@@ -1,20 +1,25 @@
-version: '3'
 services:
   app:
     build: .
     ports:
       - "8080:8080"
     environment:
-      - DATABASE_URL=postgres://user:password@db:5432/authdb?sslmode=disable
-      - JWT_SECRET=your-secret-key
+      - DATABASE_URL=postgres://postgres:root@db:5432/authdb?sslmode=disable
+      - JWT_SECRET=ee69caf1161cccd7336417296e81d9eb3a45668c66b4fd264b45893a90907be9
       - PORT=8080
     depends_on:
-      - db
+      db:
+        condition: service_healthy
   db:
-    image: postgres:15-alpine
+    image: postgres:17-alpine  
     environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
       - POSTGRES_DB=authdb
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d authdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
