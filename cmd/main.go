@@ -8,9 +8,9 @@ import (
     "github.com/gin-gonic/gin"
     _ "github.com/lib/pq"
     "github.com/joho/godotenv"
-    "github.com/yourusername/auth-service/internal/handler"
-    "github.com/yourusername/auth-service/internal/repository"
-    "github.com/yourusername/auth-service/internal/usecase"
+    "github.com/saisubin/auth-service/internal/handler"
+    "github.com/saisubin/auth-service/internal/repository"
+    "github.com/saisubin/auth-service/internal/usecase"
 )
 
 func main() {

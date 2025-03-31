@@ -3,7 +3,7 @@ package repository
 
 import (
     "database/sql"
-    "github.com/yourusername/auth-service/internal/entity"
+    "github.com/saisubin/auth-service/internal/entity"
 )
 
 type UserRepository struct {

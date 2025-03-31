@@ -5,7 +5,7 @@ import (
     "errors"
     "time"
     "github.com/golang-jwt/jwt/v4"
-    "github.com/yourusername/auth-service/internal/entity"
+    "github.com/saisubin/auth-service/internal/entity"
 )
 
 type AuthRepository interface {
