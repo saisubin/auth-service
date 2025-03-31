@@ -1,0 +1,88 @@
+Here’s the raw content for your `README.md`, ready to copy and paste:
+
+```
+# Auth Service
+
+A lightweight authentication service built with Go, Gin, PostgreSQL, and JWT. This project provides a foundation for user signup and login functionality, secured with JWT-based authentication.
+
+## Features
+- User registration with email and password
+- User login with JWT token generation
+- Clean architecture (entity, usecase, handler, repository)
+- Dockerized for easy deployment
+
+## Prerequisites
+- [Docker](https://www.docker.com/get-started) and [Docker Compose](https://docs.docker.com/compose/install/)
+- [Git](https://git-scm.com/downloads)
+
+## Setup
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/saisubin/auth-service.git
+   cd auth-service
+   ```
+
+2. **Run the Application**:
+   ```bash
+   docker-compose up --build
+   ```
+   - This starts the Go app (`baseapp-app-1`) on `localhost:8080` and PostgreSQL (`baseapp-db-1`) on `localhost:5432`.
+
+3. **Stop the Application** (when done):
+   ```bash
+   docker-compose down
+   ```
+
+## Endpoints
+All endpoints are hosted at `http://localhost:8080`.
+
+| Method | Endpoint     | Description            | Request Body                     | Response                       |
+|--------|--------------|------------------------|----------------------------------|--------------------------------|
+| POST   | `/signup`    | Register a new user    | `{"email": "user@example.com", "password": "password123"}` | `{"message": "user created"}` or `{"error": "email already exists"}` |
+| POST   | `/login`     | Login and get JWT token| `{"email": "user@example.com", "password": "password123"}` | `{"token": "jwt.token.here"}` |
+
+### Example Usage
+- **Signup**:
+  ```bash
+  curl -X POST http://localhost:8080/signup -H "Content-Type: application/json" -d '{"email": "test@example.com", "password": "password123"}'
+  ```
+- **Login**:
+  ```bash
+  curl -X POST http://localhost:8080/login -H "Content-Type: application/json" -d '{"email": "test@example.com", "password": "password123"}'
+  ```
+
+## Project Structure
+```
+auth-service/
+├── cmd/                # Main application entry point
+│   └── main.go
+├── internal/           # Application logic
+│   ├── entity/        # Data models (e.g., User)
+│   ├── handler/       # HTTP handlers
+│   ├── repository/    # Database operations
+│   └── usecase/       # Business logic
+├── .env.example        # Example environment variables
+├── Dockerfile          # Docker configuration for Go app
+├── docker-compose.yml  # Docker Compose configuration
+└── go.mod              # Go module dependencies
+```
+
+## Environment Variables
+Defined in `docker-compose.yml`:
+- `DATABASE_URL`: PostgreSQL connection string (e.g., `postgres://postgres_name:root_name@db:5432/authdb?sslmode=disable`)
+- `JWT_SECRET`: Secret key for JWT signing (e.g., `ee69caf1161cccd7336417296e81d9eb3a45668c66b4fd264b45893a90907be9`)
+- `PORT`: Application port (default: `8080`)
+
+## Contributing
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b feature-name`.
+3. Commit changes: `git commit -m "Add feature"`.
+4. Push to the branch: `git push origin feature-name`.
+5. Open a pull request.
+
+## License
+[MIT License](LICENSE) - feel free to use, modify, and distribute this code.
+
+## Contact
+For issues or suggestions, open an issue on GitHub or reach out to [saisubin](https://github.com/saisubin).
+```
